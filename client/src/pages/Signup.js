@@ -1,10 +1,15 @@
 import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 
 import {TextField, Grid, Box, Typography, FormControlLabel, Checkbox, Button, Hidden} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 
 import AlertSnackbar from "./utility/AlertSnackbar";
 import Menu from "./Menu";
+
+const axiosClient = axios.create({
+    baseURL:'http://localhost:3001/'
+})
 
 const signupStyle = makeStyles(theme => ({
     loginContainer: {
@@ -49,7 +54,7 @@ const SignupPage = () => {
 
     const [showSnackbar,setShowSnackbar] = useState(false);
 
-    const [userinfo,setUserinfo] = useState({
+    const [userInfo,setUserInfo] = useState({
         data:{
             name:"",
             email:"",
@@ -67,9 +72,9 @@ const SignupPage = () => {
     }
 
     const setInput = (e) =>{
-        setUserinfo({
+        setUserInfo({
             data:{
-                ...userinfo.data,[e.target.name]:e.target.value
+                ...userInfo.data,[e.target.name]:e.target.value
             }
         })
     }
@@ -78,10 +83,10 @@ const SignupPage = () => {
 
         setErrors({errors: ''})
 
-        if (userinfo.data.name === ''
-            || userinfo.data.email === ''
-            || userinfo.data.password === ''
-            || userinfo.data.confirm === '') {
+        if (userInfo.data.name === ''
+            || userInfo.data.email === ''
+            || userInfo.data.password === ''
+            || userInfo.data.confirm === '') {
 
             setErrors({
                 errors: 'Fill all required fields'
@@ -90,7 +95,7 @@ const SignupPage = () => {
             setShowSnackbar(true);
             return false;
         }else
-        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(userinfo.data.email) === false) {
+        if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(userInfo.data.email) === false) {
 
             setErrors({
                 ...errors, errors: '\n Please enter valid email Address'
@@ -99,7 +104,7 @@ const SignupPage = () => {
             setShowSnackbar(true);
             return false;
         }else
-        if (userinfo.data.password.length < 6) {
+        if (userInfo.data.password.length < 6) {
 
             setErrors({
                 ...errors, errors: '\n Password must be more then 6 character long'
@@ -108,7 +113,7 @@ const SignupPage = () => {
             setShowSnackbar(true);
             return false;
         }else
-        if (userinfo.data.password !== userinfo.data.confirm) {
+        if (userInfo.data.password !== userInfo.data.confirm) {
 
             setErrors({
                 ...errors, errors: '\n Password and confirm does not match'
@@ -131,7 +136,26 @@ const SignupPage = () => {
             setErrors({errors: 'Check terms and condition checkbox'});
         } else {
             if (validate()) {
-                console.log("success");
+                axiosClient.post('user/register',{
+                    userInfo
+                })
+                    .then(response=>{
+                        setUserInfo({
+                            data: {
+                                name: "",
+                                email: "",
+                                password: "",
+                                confirm: ""
+                            }
+                        })
+                        if (response.status === 201) {
+                            setShowSnackbar(true)
+                            setSuccess({result: 'Your Account has been created'})
+                        }
+                    })
+                    .catch(errors=>{
+                        console.log(errors);
+                    })
             } else {
                 console.log("failed");
             }
@@ -161,7 +185,7 @@ const SignupPage = () => {
                                         variant="outlined"
                                         label="name"
                                         name="name"
-                                        value={userinfo.data.name}
+                                        value={userInfo.data.name}
                                         onChange={setInput}/>
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
@@ -174,7 +198,7 @@ const SignupPage = () => {
                                         variant="outlined"
                                         label="email"
                                         name="email"
-                                        value={userinfo.data.email}
+                                        value={userInfo.data.email}
                                         onChange={setInput}/>
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
@@ -190,7 +214,7 @@ const SignupPage = () => {
                                         variant="outlined"
                                         label="password"
                                         name="password"
-                                        value={userinfo.data.password}
+                                        value={userInfo.data.password}
                                         onChange={setInput}/>
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
@@ -206,7 +230,7 @@ const SignupPage = () => {
                                         variant="outlined"
                                         label="confirm"
                                         name="confirm"
-                                        value={userinfo.data.confirm}
+                                        value={userInfo.data.confirm}
                                         onChange={setInput}/>
                                 </Grid>
                                 <Grid item xs={12} md={12}>

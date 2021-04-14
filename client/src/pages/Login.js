@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react';
+import axios from 'axios';
 
 import {Button, Grid, Hidden, TextField, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
@@ -6,6 +7,10 @@ import Box from "@material-ui/core/Box";
 
 import AlertSnackbar from "./utility/AlertSnackbar";
 import Menu from "./Menu";
+
+const axiosClient = axios.create({
+    baseURL:'http://localhost:3001/'
+});
 
 const loginStyle = makeStyles(theme =>({
     loginContainer:{
@@ -84,7 +89,21 @@ const LoginPage = () =>{
     const authenticate = (e) =>{
         e.preventDefault();
         if(validate()){
-            console.log("success")
+            axiosClient.post('/user/login',{loginData})
+                .then(response=>{
+                    if(response.status===200){
+                        if(response.data.response.result===1){
+                            console.log('successfully loggedin')
+                        }else{
+                            setShowSnackbar(true);
+                            setErrors({error:response.data.response.message})
+                        }
+                    }
+
+                })
+                .catch(error=>{
+                    console.log("error occured")
+                })
         }else{
             console.log("failed");
         }

@@ -1,4 +1,5 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 import {Button, Grid, Hidden, TextField, Typography} from "@material-ui/core";
@@ -7,6 +8,7 @@ import Box from "@material-ui/core/Box";
 
 import AlertSnackbar from "./utility/AlertSnackbar";
 import Menu from "./Menu";
+import UserContext from "../contexts/UserContext";
 
 const axiosClient = axios.create({
     baseURL:'http://localhost:3001/'
@@ -43,6 +45,10 @@ const loginStyle = makeStyles(theme =>({
 }))
 
 const LoginPage = () =>{
+
+    const userContext = useContext(UserContext);
+
+    const history = useHistory();
 
     const classes = loginStyle();
 
@@ -92,8 +98,10 @@ const LoginPage = () =>{
             axiosClient.post('/user/login',{loginData})
                 .then(response=>{
                     if(response.status===200){
-                        if(response.data.response.result===1){
-                            console.log('successfully loggedin')
+                        if(response.data.response.status===1){
+                            userContext.userInfo.name = response.data.response.userData.name;
+                            userContext.userInfo.email = response.data.response.userData.email;
+                            history.push('/user/dashboard');
                         }else{
                             setShowSnackbar(true);
                             setErrors({error:response.data.response.message})

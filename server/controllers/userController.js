@@ -8,6 +8,7 @@ exports.login = async(req,res,next) => {
         const user = User.findOne({email:req.body.loginData.data.username},(err,doc)=>{
             if(doc){
                 bcrypt.compare(req.body.loginData.data.password,doc.password,(err,result)=>{
+                  console.log(result)
                     if(result===true){
                         res.status(200).send({response:{
                                 status:1,

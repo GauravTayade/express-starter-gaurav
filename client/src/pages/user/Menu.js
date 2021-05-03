@@ -7,9 +7,6 @@ import {
   AppBar,
   Button,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
   Box,
   Container,
   Avatar,
@@ -78,8 +75,8 @@ const MenuPage = (props) => {
             <Button>
               <Link className={classes.linkStyle} to='/user/friends_pool'>Friends Pool</Link>
             </Button>
-            <Button>
-              <Link className={classes.linkStyle} to='/'>Create Pool</Link>
+            <Button onClick={props.openDialog}>
+              Create Pool
             </Button>
             <Button>
               <Link className={classes.linkStyle} to='/user/opinion'>Opinion</Link>

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import MenuPage from './Menu';
+import PoolDialog from "./dashboardComponents/PoolDialog";
+
 import {
   Avatar,
   Box,
@@ -11,11 +13,11 @@ import {
   Grid,
   List,
   ListItem,
-  Typography, Button
+  Typography,
+  Button
 } from "@material-ui/core";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import SettingsIcon from '@material-ui/icons/Settings';
-import CloseIcon from '@material-ui/icons/Close';
 import {makeStyles} from "@material-ui/core/styles";
 import {Close} from "@material-ui/icons";
 
@@ -35,10 +37,19 @@ const dashStyle = makeStyles(theme => ({
 const DashboardPage = (props) => {
 
   const classes = dashStyle();
+  const [dialogStatus,setDialogStatus] = useState(false);
+
+  const closeDialog = () =>{
+    setDialogStatus(false)
+  }
+
+  const openDialog= () =>{
+    setDialogStatus(true)
+  }
 
   return (
     <>
-      <MenuPage/>
+      <MenuPage openDialog={openDialog}/>
       <Grid container style={{minHeight:'100vh'}}>
         <Grid item xs={3} className={classes.friendsContainer}>
           <Box mx={2} pt={4} pb={1}>
@@ -107,7 +118,7 @@ const DashboardPage = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Box display="flex" justifyContent="flex-end">
-              <Button >Create Pool</Button>
+              <Button onClick={openDialog}>Create Pool</Button>
             </Box>
           </Grid>
           </Grid>
@@ -247,6 +258,7 @@ const DashboardPage = (props) => {
           </Grid>
         </Grid>
       </Grid>
+      <PoolDialog dialogStatus={dialogStatus} closeDialog={closeDialog}/>
     </>
   )
 

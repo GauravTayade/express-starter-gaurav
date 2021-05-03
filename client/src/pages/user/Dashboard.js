@@ -20,6 +20,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import SettingsIcon from '@material-ui/icons/Settings';
 import {makeStyles} from "@material-ui/core/styles";
 import {Close} from "@material-ui/icons";
+import FriendListDialog from "./dashboardComponents/FriendListDialog";
 
 const dashStyle = makeStyles(theme => ({
   avatarSm: {
@@ -38,6 +39,7 @@ const DashboardPage = (props) => {
 
   const classes = dashStyle();
   const [dialogStatus,setDialogStatus] = useState(false);
+  const [friendListDialogStatus,setFriendListDialogStatus] = useState(false);
 
   const closeDialog = () =>{
     setDialogStatus(false)
@@ -45,6 +47,14 @@ const DashboardPage = (props) => {
 
   const openDialog= () =>{
     setDialogStatus(true)
+  }
+
+  const openFriendListDialog = () =>{
+    setFriendListDialogStatus(true)
+  }
+
+  const closeFriendListDialog = () => {
+    setFriendListDialogStatus(false)
   }
 
   return (
@@ -180,7 +190,7 @@ const DashboardPage = (props) => {
                 </Grid>
                 <Grid item xs={6}>
                   <Box display="flex" justifyContent="flex-end">
-                    <Button>Create List</Button>
+                    <Button onClick={openFriendListDialog}>Create List</Button>
                   </Box>
                 </Grid>
               </Grid>
@@ -258,7 +268,12 @@ const DashboardPage = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <PoolDialog dialogStatus={dialogStatus} closeDialog={closeDialog}/>
+      <PoolDialog
+        dialogStatus={dialogStatus}
+        closeDialog={closeDialog}/>
+      <FriendListDialog
+        dialogStatus={friendListDialogStatus}
+        closeDialog={closeFriendListDialog}/>
     </>
   )
 

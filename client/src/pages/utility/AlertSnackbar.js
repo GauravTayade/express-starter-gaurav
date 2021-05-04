@@ -11,11 +11,11 @@ const AlertSnackbar = (props) =>{
             autoHideDuration={6000}
             message={props.message}
             action={
-                <React.Fragment>
+                <>
                     <IconButton size="small" aria-label="close" color="inherit" onClick={props.onclose}>
                         <CloseIcon fontSize="small" />
                     </IconButton>
-                </React.Fragment>
+                </>
             }
         />
     )

@@ -58,11 +58,7 @@ const SignupPage = () => {
       confirm: ""
     }
   });
-
-  useEffect(() => {
-    document.title = "Signup"
-  }, []);
-
+  
   const closeSnackbar = () => {
     setShowSnackbar(false)
   }

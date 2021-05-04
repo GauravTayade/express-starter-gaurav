@@ -58,7 +58,7 @@ const SignupPage = () => {
       confirm: ""
     }
   });
-  
+
   const closeSnackbar = () => {
     setShowSnackbar(false)
   }

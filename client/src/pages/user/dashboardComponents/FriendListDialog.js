@@ -1,4 +1,6 @@
 import React from 'react';
+import AvatarComponent from "./AvatarComponent";
+
 import {
   Dialog,
   DialogContent,
@@ -40,7 +42,7 @@ const dialogStyle = makeStyles(theme => ({
     paddingRight: '2rem',
     paddingLeft: '2rem'
   },
-  closeBtn: {
+  btnCloseDialog: {
     right: '5px',
     position: 'absolute',
     top: '5px'
@@ -48,12 +50,18 @@ const dialogStyle = makeStyles(theme => ({
   avatarSm: {
     width: '35px',
     height: '35px'
-  }
+  },
+  btnClose:{
+    paddingRight: '1rem',
+    color: 'rgba(0, 0, 0, 0.54)'
+  },
 }))
 
 const FriendListDialog = (props) => {
 
   const classes = dialogStyle();
+  const imagPath = "/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png";
+  const username = "Demo User";
 
   return (
     <>
@@ -62,7 +70,7 @@ const FriendListDialog = (props) => {
           <Typography variant="h4" align="center">
             Create a Friend List
           </Typography>
-          <CloseIcon className={classes.closeBtn} onClick={props.closeDialog}/>
+          <CloseIcon className={classes.btnCloseDialog} onClick={props.closeDialog}/>
         </DialogTitle>
         <DialogContent>
           <Grid container>
@@ -101,44 +109,20 @@ const FriendListDialog = (props) => {
             <Grid item xs={6}>
               <List>
                 <ListItem>
-                  <Close/>
-                  <Badge color="secondary" overlap="circle" badgeContent=" " variant="dot">
-                    <Avatar className={classes.avatarSm} alt="user"
-                            src="/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png"/>
-                  </Badge>
-                  Demo user
+                  <Close className={classes.btnClose}/>
+                  <AvatarComponent imageUrl={imagPath} username={username}/>
                 </ListItem>
                 <ListItem>
-                  <Close/>
-                  <Badge color="secondary" overlap="circle" badgeContent=" " variant="dot">
-                    <Avatar alt="user" className={classes.avatarSm}
-                            src="/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png"/>
-                  </Badge>
-                  Demo user
+                  <Close className={classes.btnClose}/>
+                  <AvatarComponent imageUrl={imagPath} username={username}/>
                 </ListItem>
                 <ListItem>
-                  <Close/>
-                  <Badge color="secondary" overlap="circle" badgeContent=" " variant="dot">
-                    <Avatar alt="user" className={classes.avatarSm}
-                            src="/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png"/>
-                  </Badge>
-                  Demo user
+                  <Close className={classes.btnClose}/>
+                  <AvatarComponent imageUrl={imagPath} username={username}/>
                 </ListItem>
                 <ListItem>
-                  <Close/>
-                  <Badge color="secondary" overlap="circle" badgeContent=" " variant="dot">
-                    <Avatar alt="user" className={classes.avatarSm}
-                            src="/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png"/>
-                  </Badge>
-                  Demo user
-                </ListItem>
-                <ListItem>
-                  <Close/>
-                  <Badge color="secondary" overlap="circle" badgeContent=" " variant="dot">
-                    <Avatar alt="user" className={classes.avatarSm}
-                            src="/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png"/>
-                  </Badge>
-                  Demo user
+                  <Close className={classes.btnClose}/>
+                  <AvatarComponent imageUrl={imagPath} username={username}/>
                 </ListItem>
               </List>
             </Grid>

@@ -5,12 +5,14 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {theme} from "./themes/theme";
 import LoginPage from "./pages/Login";
 import SignupPage from "./pages/Signup";
-import DashboardPage from "./pages/user/Dashboard";
 import FriendsPage from "./pages/user/Friends";
 import OpinionPage from "./pages/user/Opinion";
 import FriendsPoolPage from "./pages/user/Opinion";
+import ProfilePage from "./pages/user/Profile";
+import DashboardPage from "./pages/user/Dashboard";
 
 import "./App.css";
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
         <Route path="/user/friends" exact component={FriendsPage}/>
         <Route path="/user/friends_pool" exact component={FriendsPoolPage}/>
         <Route path="/user/opinion" exact component={OpinionPage}/>
+        <Route path="/user/:user_id/profile" exact component={ProfilePage}/>
       </BrowserRouter>
     </MuiThemeProvider>
   );

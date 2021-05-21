@@ -45,24 +45,16 @@ const loginStyle = makeStyles(theme =>({
 const LoginPage = () =>{
 
     const classes = loginStyle();
-
     const [errors,setErrors] = useState({error:''})
-
     const [showSnackbar,setShowSnackbar] = useState(false);
-
     const [loginData,setLoginData] = useState({data:{
             username:'',
             password:''
         }})
 
-    useEffect(()=>{
-        document.title="Login"
-    },[])
-
     const closeSnackbar=()=>{
         setShowSnackbar(false)
     }
-
 
     const setInput = (e) => {
         setLoginData({

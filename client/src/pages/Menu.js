@@ -46,7 +46,7 @@ const Menu = () =>{
                         <img alt="logo" className={classes.iconImage} src="./assets/photos/icon.jpg"/>
                     </Typography>
                     {uselocation.pathname.split("/").pop()==='login'?
-                        <Link className={classes.loginButton} to="/">Singnup</Link>
+                        <Link className={classes.loginButton} to="/">Signup</Link>
                         :
                         <Link className={classes.loginButton} to="/login">Login</Link>
                     }

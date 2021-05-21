@@ -1,10 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+
 
 import {TextField, Grid, Box, Typography, FormControlLabel, Checkbox, Button, Hidden} from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 
 import AlertSnackbar from "./utility/AlertSnackbar";
 import Menu from "./Menu";
+
+const axiosClient = axios.create({
+  baseURL: 'http://localhost:3001/'
+})
 
 const signupStyle = makeStyles(theme => ({
   loginContainer: {
@@ -122,7 +128,26 @@ const SignupPage = () => {
       setErrors({errors: 'Check terms and condition checkbox'});
     } else {
       if (validate()) {
-        console.log("success");
+        axiosClient.post('user/register', {
+          userInfo
+        })
+          .then(response => {
+            setUserInfo({
+              data: {
+                name: "",
+                email: "",
+                password: "",
+                confirm: ""
+              }
+            })
+            if (response.status === 201) {
+              setShowSnackbar(true)
+              setSuccess({result: 'Your Account has been created'})
+            }
+          })
+          .catch(errors => {
+            console.log(errors);
+          })
       } else {
         console.log("failed");
       }

@@ -17,8 +17,7 @@ import {
 import FaceIcon from '@material-ui/icons/Face';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {makeStyles} from "@material-ui/core/styles";
-import PoolDialog from "./dashboardComponents/PoolDialog";
-import FriendListDialog from "./dashboardComponents/FriendListDialog";
+import DialogCreatePoll from "./dashboardComponents/DialogCreatePoll";
 
 const menuStyle = makeStyles((theme) => ({
   appBar: {
@@ -127,7 +126,7 @@ const MenuPage = (props) => {
           </Container>
         </Toolbar>
       </AppBar>
-      <PoolDialog
+      <DialogCreatePoll
         dialogStatus={props.dialogStatus}
         closeDialog={props.closeDialog}/>
     </>

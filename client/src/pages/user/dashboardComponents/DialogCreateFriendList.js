@@ -13,8 +13,6 @@ import {
   TextField,
   FormControl,
   ListItem,
-  Badge,
-  Avatar,
   List
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
@@ -57,7 +55,7 @@ const dialogStyle = makeStyles(theme => ({
   },
 }))
 
-const FriendListDialog = (props) => {
+const DialogCreateFriendList = (props) => {
 
   const classes = dialogStyle();
   const imagPath = "/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png";
@@ -139,4 +137,4 @@ const FriendListDialog = (props) => {
 
 }
 
-export default FriendListDialog;
+export default DialogCreateFriendList;

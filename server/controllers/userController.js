@@ -80,6 +80,6 @@ exports.register= async(req,res,next)=>{
 
 
     }else{
-        res.send('erroe occured');
+        res.send('error occured');
     }
 }

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 import MenuPage from './Menu';
-import FriendsComponent from "./dashboardComponents/FriendsComponent";
-import PoolComponent from "./dashboardComponents/PoolComponent";
+import FriendsListComponent from "./dashboardComponents/FriendsListComponent";
+import PollComponent from "./dashboardComponents/PollComponent";
 import ListComponent from "./dashboardComponents/ListComponent";
 
 import {Grid} from "@material-ui/core";
@@ -41,10 +41,10 @@ const DashboardPage = () => {
       <MenuPage openDialog={openDialog} dialogStatus={dialogStatus} closeDialog={closeDialog}/>
       <Grid container style={{minHeight: '100vh'}}>
         <Grid item xs={2} className={classes.friendsContainer}>
-          <FriendsComponent/>
+          <FriendsListComponent/>
         </Grid>
         <Grid item xs={10} className={classes.contentContainer}>
-          <PoolComponent openDialog={openDialog} dialogStatus={dialogStatus} closeDialog={closeDialog}/>
+          <PollComponent openDialog={openDialog} dialogStatus={dialogStatus} closeDialog={closeDialog}/>
           <ListComponent/>
         </Grid>
       </Grid>

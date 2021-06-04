@@ -1,10 +1,17 @@
 import React, {useState} from "react";
-import {Avatar, Badge, Box, Button, Card, CardContent, Grid, List, ListItem, Typography} from "@material-ui/core";
+import {Box,
+  Button,
+  Card,
+  CardContent,
+  Grid,
+  List,
+  ListItem,
+  Typography} from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import {Close} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
 import AvatarComponent from "./AvatarComponent";
-import FriendListDialog from "./FriendListDialog";
+import DialogCreateFriendList from "./DialogCreateFriendList";
 
 const ListComponentStyle = makeStyles(theme => ({
   avatarSm: {
@@ -23,6 +30,9 @@ const ListComponentStyle = makeStyles(theme => ({
     border: '1px solid #e8e8e8',
     borderRadius: '25px',
     padding: '0.5rem 1rem'
+  },
+  cardShadow:{
+    boxShadow:'rgba(0,0,0,0.24) 0px 3px 8px'
   }
 }))
 
@@ -64,8 +74,8 @@ const ListComponent = (props) => {
         <Grid container>
 
           <Grid item xs={3}>
-            <Box boxShadow={3}>
-              <Card xs={4}>
+            <Box className={classes.cardShadow}>
+              <Card xs={4} elevation="0">
                 <Box px={3} py={1} borderBottom={1}>
                   <Grid container>
                     <Grid item xs={11}>
@@ -99,7 +109,7 @@ const ListComponent = (props) => {
         </Grid>
       </Box>
     </Grid>
-  <FriendListDialog
+  <DialogCreateFriendList
     dialogStatus={friendListDialogStatus}
     closeDialog={closeFriendListDialog}/>
   </>

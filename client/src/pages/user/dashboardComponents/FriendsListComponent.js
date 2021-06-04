@@ -1,8 +1,7 @@
 import React from "react";
-import {Avatar, Badge, Box, List, ListItem, Typography, Grid} from "@material-ui/core";
+import {Box, List, ListItem, Typography, Grid} from "@material-ui/core";
 import AvatarComponent from "./AvatarComponent";
 import {makeStyles} from "@material-ui/core/styles";
-import {theme} from "../../../themes/theme";
 
 const avatarStyle = makeStyles(theme => ({
   avatarItem: {
@@ -11,7 +10,7 @@ const avatarStyle = makeStyles(theme => ({
   }
 }));
 
-const FriendsComponent = (props) => {
+const FriendsListComponent = (props) => {
 
   const classes = avatarStyle();
 
@@ -39,4 +38,4 @@ const FriendsComponent = (props) => {
 
 }
 
-export default FriendsComponent;
+export default FriendsListComponent;

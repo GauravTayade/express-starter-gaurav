@@ -1,7 +1,6 @@
 import React from "react";
 import {Avatar, Badge, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {withStyles} from "@material-ui/core";
 
 const avatarStyle = makeStyles(theme=>({
   username:{

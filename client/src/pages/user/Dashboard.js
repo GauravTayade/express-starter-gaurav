@@ -34,23 +34,23 @@ const dashStyle = makeStyles(theme => ({
 const DashboardPage = (props) => {
 
   const classes = dashStyle();
-  const [dialogStatus,setDialogStatus] = useState(false);
-  const [friendListDialogStatus,setFriendListDialogStatus] = useState(false);
+  const [isDialogOpen,setIsDialogOpen] = useState(false);
+  const [isFriendListDialogOpen,setIsFriendListDialogOpen] = useState(false);
 
   const closeDialog = () =>{
-    setDialogStatus(false)
+    setIsDialogOpen(false)
   }
 
   const openDialog= () =>{
-    setDialogStatus(true)
+    setIsDialogOpen(true)
   }
 
   const openFriendListDialog = () =>{
-    setFriendListDialogStatus(true)
+    setIsFriendListDialogOpen(true)
   }
 
   const closeFriendListDialog = () => {
-    setFriendListDialogStatus(false)
+    setIsFriendListDialogOpen(false)
   }
 
   return (
@@ -102,10 +102,10 @@ const DashboardPage = (props) => {
         </Grid>
       </Grid>
       <PoolDialog
-        dialogStatus={dialogStatus}
+        isDialogOpen={isDialogOpen}
         closeDialog={closeDialog}/>
       <FriendListDialog
-        dialogStatus={friendListDialogStatus}
+        isFriendListDialogOpen={isFriendListDialogOpen}
         closeDialog={closeFriendListDialog}/>
     </>
   )

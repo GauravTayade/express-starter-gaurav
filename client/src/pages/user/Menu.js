@@ -84,7 +84,7 @@ const MenuPage = (props) => {
               <Link className={classes.linkStyle} to='/user/friends'>Friends</Link>
             </Button>
             <Button>
-              <Link className={classes.linkStyle} to='/user/friends_pool'>Friends Pool</Link>
+              <Link className={classes.linkStyle} to='/user/friends-pool'>Friends Pool</Link>
             </Button>
               <Button>
                 <Link className={classes.linkStyle} to='/user/opinion'>Opinion</Link>

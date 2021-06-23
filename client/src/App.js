@@ -21,7 +21,7 @@ function App() {
         <Route path="/login" exact component={LoginPage}/>
         <Route path="/user/dashboard" exact component={DashboardPage}/>
         <Route path="/user/friends" exact component={FriendsPage}/>
-        <Route path="/user/friends_pool" exact component={FriendsPoolPage}/>
+        <Route path="/user/friends-pool" exact component={FriendsPoolPage}/>
         <Route path="/user/opinion" exact component={OpinionPage}/>
       </BrowserRouter>
     </MuiThemeProvider>

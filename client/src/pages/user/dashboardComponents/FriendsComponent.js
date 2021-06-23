@@ -1,8 +1,7 @@
 import React from "react";
-import {Avatar, Badge, Box, List, ListItem, Typography, Grid} from "@material-ui/core";
+import {Box, List, ListItem, Typography, Grid} from "@material-ui/core";
 import AvatarComponent from "./AvatarComponent";
 import {makeStyles} from "@material-ui/core/styles";
-import {theme} from "../../../themes/theme";
 
 const avatarStyle = makeStyles(theme => ({
   avatarItem: {

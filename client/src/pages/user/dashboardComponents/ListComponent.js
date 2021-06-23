@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Badge, Box, Card, CardContent, Grid, List, ListItem, Typography} from "@material-ui/core";
+import {Box, Card, CardContent, Grid, List, ListItem, Typography} from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import {Close} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";

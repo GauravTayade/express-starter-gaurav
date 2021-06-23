@@ -68,13 +68,12 @@ const PoolDialog = (props) => {
 
   const handleFileDrop = (e) => {
     e.preventDefault();
-    console.log(e.dataTransfer.files)
   }
 
 
   return (
     <>
-      <Dialog open={props.dialogStatus} fullWidth={true} maxWidth="md">
+      <Dialog open={props.isDialogOpen} fullWidth={true} maxWidth="md">
         <DialogTitle id="customized-dialog-title">
           <Typography variant="h4" align="center">
             Create a Poll

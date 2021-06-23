@@ -2,15 +2,13 @@ require('dotenv').config();
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 
-
 exports.login = async(req,res,next) => {
     if(req.body.loginData.data.username !== '' &&
         req.body.loginData.data.password !== ''){
         const user = User.findOne({email:req.body.loginData.data.username},(err,doc)=>{
             if(doc){
                 bcrypt.compare(req.body.loginData.data.password,doc.password,(err,result)=>{
-                  console.log(result)
-                    if(result===true){
+                    if(result){
                         res.status(200).send({response:{
                                 status:1,
                                 message: "Valid user record",

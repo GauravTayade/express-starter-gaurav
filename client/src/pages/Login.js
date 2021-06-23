@@ -102,10 +102,12 @@ const LoginPage = () =>{
 
                 })
                 .catch(error=>{
-                    console.log("error occured")
+                    setShowSnackbar(true);
+                    setErrors({error:'Something went Wrong! Try again.'})
                 })
         }else{
-            console.log("failed");
+            setShowSnackbar(true);
+            setErrors({error:'Something went Wrong! Try again.'})
         }
     }
 

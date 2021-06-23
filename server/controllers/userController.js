@@ -34,8 +34,7 @@ exports.login = async(req,res,next) => {
     }
 }
 
-exports.register = async (req, res, next) => {
-  console.log(req.body)
+exports.register= async(req,res,next)=>{
 
   if (req.body.userInfo) {
 
@@ -81,9 +80,10 @@ exports.register = async (req, res, next) => {
         }
       })
     }
-
-
-  } else {
-    res.send('Error Occurred');
-  }
+    }else{
+      res.status(400).send({response:{
+          status:false,
+          message:"An error has occured"
+        }})
+    }
 }

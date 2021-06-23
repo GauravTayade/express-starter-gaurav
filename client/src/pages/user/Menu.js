@@ -14,8 +14,11 @@ import {
   Container,
   Avatar,
   Menu,
-  MenuItem
+  MenuItem, ListItemIcon
 } from "@material-ui/core";
+
+import FaceIcon from '@material-ui/icons/Face';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -44,7 +47,16 @@ const menuStyle = makeStyles((theme) => ({
   },
   linkStyle:{
     textDecoration: 'none',
-    color: '#000'
+    color: '#000',
+    margin:'0rem 4rem'
+  },
+  btnRounded:{
+    border: '1px solid #e8e8e8',
+    borderRadius: '25px',
+    padding: '0.5rem 1rem'
+  },
+  menuAvatar:{
+    padding:'0rem 1rem'
   }
 }));
 
@@ -76,19 +88,19 @@ const MenuPage = (props) => {
               <Link className={classes.linkStyle} to='/user/friends'>Friends</Link>
             </Button>
             <Button>
-              <Link className={classes.linkStyle} to='/user/friends_pool'>Friends Pool</Link>
+              <Link className={classes.linkStyle} to='/user/friends-pool'>Friends Pool</Link>
             </Button>
-            <Button>
-              <Link className={classes.linkStyle} to='/'>Create Pool</Link>
-            </Button>
-            <Button>
-              <Link className={classes.linkStyle} to='/user/opinion'>Opinion</Link>
+              <Button>
+                <Link className={classes.linkStyle} to='/user/opinion'>Opinion</Link>
+              </Button>
+            <Button onClick={props.openDialog} className={[classes.btnRounded,classes.linkStyle]}>
+              Create Pool
             </Button>
             <div p={2}>
               <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                 <Avatar alt={userContext.userInfo.name}
                         src="/assets/photos/610f7a940f59d5cef71f3de7754a70a1411d8bb8.png"/>
-                {userContext.userInfo.name}
+                <span className={classes.menuAvatar}>{userContext.userInfo.name} Demo Username</span>
               </Button>
               <Menu
                 id="simple-menu"
@@ -99,8 +111,18 @@ const MenuPage = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <FaceIcon fontSize="small"/>
+                  </ListItemIcon>
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <ExitToAppIcon fontSize="small"/>
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
               </Menu>
             </div>
             </Box>

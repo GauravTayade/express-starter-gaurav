@@ -7,6 +7,9 @@ import {
   AppBar,
   Button,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   Box,
   Container,
   Avatar,
@@ -16,6 +19,7 @@ import {
 
 import FaceIcon from '@material-ui/icons/Face';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import {makeStyles} from "@material-ui/core/styles";
 import PoolDialog from "./dashboardComponents/PoolDialog";
 import FriendListDialog from "./dashboardComponents/FriendListDialog";
@@ -86,7 +90,7 @@ const MenuPage = (props) => {
               <Link className={classes.linkStyle} to='/user/friends'>Friends</Link>
             </Button>
             <Button>
-              <Link className={classes.linkStyle} to='/user/friends_pool'>Friends Pool</Link>
+              <Link className={classes.linkStyle} to='/user/friends-pool'>Friends Pool</Link>
             </Button>
               <Button>
                 <Link className={classes.linkStyle} to='/user/opinion'>Opinion</Link>

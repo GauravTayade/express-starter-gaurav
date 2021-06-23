@@ -65,7 +65,7 @@ const FriendListDialog = (props) => {
 
   return (
     <>
-      <Dialog open={props.dialogStatus} fullWidth={true} maxWidth="md">
+      <Dialog open={props.isFriendListDialogOpen} fullWidth={true} maxWidth="md">
         <DialogTitle id="customized-dialog-title">
           <Typography variant="h4" align="center">
             Create a Friend List

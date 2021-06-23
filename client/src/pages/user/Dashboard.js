@@ -9,7 +9,8 @@ import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
 const dashStyle = makeStyles(theme => ({
-  friendsContainer: {
+
+  friendsContainer:{
     borderRight: 'solid 0.5px #e8e8e8'
   },
   contentContainer: {
@@ -19,21 +20,31 @@ const dashStyle = makeStyles(theme => ({
     border: '1px solid #e8e8e8',
     borderRadius: '25px',
     padding: '0.5rem 1rem'
+
   }
 }));
 
 const DashboardPage = () => {
 
   const classes = dashStyle();
+  const [isDialogOpen,setIsDialogOpen] = useState(false);
+  const [isFriendListDialogOpen,setIsFriendListDialogOpen] = useState(false);
 
-  const [dialogStatus,setDialogStatus] = useState(false);
 
   const closeDialog = () =>{
-    setDialogStatus(false)
+    setIsDialogOpen(false)
   }
 
   const openDialog= () =>{
-    setDialogStatus(true)
+    setIsDialogOpen(true)
+  }
+
+  const openFriendListDialog = () =>{
+    setIsFriendListDialogOpen(true)
+  }
+
+  const closeFriendListDialog = () => {
+    setIsFriendListDialogOpen(false)
   }
 
   return (
@@ -48,6 +59,13 @@ const DashboardPage = () => {
           <ListComponent/>
         </Grid>
       </Grid>
+
+      <PoolDialog
+        isDialogOpen={isDialogOpen}
+        closeDialog={closeDialog}/>
+      <FriendListDialog
+        isFriendListDialogOpen={isFriendListDialogOpen}
+        closeDialog={closeFriendListDialog}/>
 
     </>
   )

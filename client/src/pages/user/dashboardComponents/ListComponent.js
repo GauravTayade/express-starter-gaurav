@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Avatar, Badge, Box, Button, Card, CardContent, Grid, List, ListItem, Typography} from "@material-ui/core";
+import React from "react";
+import {Box, Card, CardContent, Grid, List, ListItem, Typography} from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import {Close} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";

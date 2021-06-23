@@ -11,7 +11,12 @@ const userSchema = new Schema({
     password:{
         type:String,
         min:6
-    }
+    },
+    friends:[{
+        userId:{
+            type:String
+        }
+    }]
 })
 
 module.exports = mongoose.model("user", userSchema);

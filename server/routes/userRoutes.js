@@ -11,4 +11,7 @@ router.use((req, res, next) => {
 router.post("/login",userController.login);
 router.post("/register",userController.register);
 
+router.get('/search',userController.getUsers);
+router.get('/get/:userid',userController.getUser);
+
 module.exports = router;

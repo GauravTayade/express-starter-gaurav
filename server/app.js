@@ -8,6 +8,7 @@ const multer = require('multer');
 const mongoose = require('mongoose')
 const userRouter = require("./routes/userRoutes");
 const pollRouter = require("./routes/pollRoutes");
+const friendRouter = require("./routes/friendRoutes");
 
 const { json, urlencoded } = express;
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, "public")));
 mongoose.set('useFindAndModify',false);
 
+app.use("/friend",friendRouter);
 app.use("/user",userRouter);
 app.use("/poll",pollRouter);
 

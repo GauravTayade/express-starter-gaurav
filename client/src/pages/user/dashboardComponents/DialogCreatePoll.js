@@ -64,7 +64,7 @@ const dialogStyle = makeStyles(theme => ({
 }))
 
 const DialogCreatePoll = (props) => {
-  let styleImage=[];
+
   const classes = dialogStyle();
   const userContext = useContext(UserContext);
   const [images,setImages] = useState([]);
@@ -144,6 +144,7 @@ const DialogCreatePoll = (props) => {
           setApiResponse(response.data.message);
           images.splice(0,images.length);
           props.closeDialog();
+          window.location.reload(false);
         }else{
 
         }
@@ -172,7 +173,7 @@ const DialogCreatePoll = (props) => {
           setApiResponse(response.data.message);
           images.splice(0,images.length);
           props.closeDialog();
-          window.location.reload();
+          window.location.reload(false);
         }else{
 
         }

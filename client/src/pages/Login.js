@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
@@ -61,10 +61,6 @@ const LoginPage = () =>{
             password:''
         }})
 
-    useEffect(()=>{
-        document.title="Login"
-    },[])
-
     const closeSnackbar=()=>{
         setShowSnackbar(false)
     }
@@ -99,8 +95,10 @@ const LoginPage = () =>{
                 .then(response=>{
                     if(response.status===200){
                         if(response.data.response.status===1){
+                            userContext.userInfo.id = response.data.response.userData.userId;
                             userContext.userInfo.name = response.data.response.userData.name;
                             userContext.userInfo.email = response.data.response.userData.email;
+                            userContext.login = true;
                             history.push('/user/dashboard');
                         }else{
                             setShowSnackbar(true);

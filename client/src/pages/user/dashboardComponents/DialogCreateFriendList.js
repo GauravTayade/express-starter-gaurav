@@ -1,5 +1,6 @@
 import React from 'react';
 import AvatarComponent from "./AvatarComponent";
+import axios from "axios";
 
 import {
   Dialog,
@@ -18,6 +19,11 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import {makeStyles} from "@material-ui/core/styles";
 import {Close} from "@material-ui/icons";
+
+const axiosClient = axios.create({
+  baseURL:process.env.REACT_APP_API_URL,
+  timeout:1000,
+})
 
 const dialogStyle = makeStyles(theme => ({
   root:{
@@ -45,6 +51,10 @@ const dialogStyle = makeStyles(theme => ({
     position: 'absolute',
     top: '5px'
   },
+  btnAdd:{
+    marginLeft:'1rem',
+    borderRadius:'1rem',
+  },
   avatarSm: {
     width: '35px',
     height: '35px'
@@ -60,6 +70,27 @@ const DialogCreateFriendList = (props) => {
   const classes = dialogStyle();
   const imagPath = "/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png";
   const username = "Demo User";
+
+  const addFriend = (userId) =>{
+    axiosClient.post('/user/friend/add',{'userid':userId})
+      .then(result => {
+        console.log(result)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    console.log(userId);
+  }
+
+  const removeFriend = (userId) =>{
+    axiosClient.post('/user/friend/remove',{'userid':userId})
+      .then(result=>{
+        console.log(result)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+  }
 
   return (
     <>
@@ -107,20 +138,24 @@ const DialogCreateFriendList = (props) => {
             <Grid item xs={6}>
               <List>
                 <ListItem>
-                  <Close className={classes.btnClose}/>
+                  <Close className={classes.btnClose} onClick={()=>removeFriend(7862763)}/>
                   <AvatarComponent imageUrl={imagPath} username={username}/>
+                  <Button onClick={()=>addFriend(987897897)} className={classes.btnAdd} variant="contained" color="primary">Add</Button>
                 </ListItem>
                 <ListItem>
                   <Close className={classes.btnClose}/>
                   <AvatarComponent imageUrl={imagPath} username={username}/>
+                  <Button className={classes.btnAdd} variant="contained" color="primary">Add</Button>
                 </ListItem>
                 <ListItem>
                   <Close className={classes.btnClose}/>
                   <AvatarComponent imageUrl={imagPath} username={username}/>
+                  <Button className={classes.btnAdd} variant="contained" color="primary">Add</Button>
                 </ListItem>
                 <ListItem>
                   <Close className={classes.btnClose}/>
                   <AvatarComponent imageUrl={imagPath} username={username}/>
+                  <Button className={classes.btnAdd} variant="contained" color="primary">Add</Button>
                 </ListItem>
               </List>
             </Grid>

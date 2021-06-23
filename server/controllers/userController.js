@@ -14,8 +14,9 @@ exports.login = async(req,res,next) => {
                                 status:1,
                                 message: "Valid user record",
                                 userData:{
-                                    name:doc.name,
-                                    email:doc.email
+                                  userId:doc._id,
+                                  name:doc.name,
+                                  email:doc.email
                                 }
                             }})
                     }else{
@@ -77,9 +78,33 @@ exports.register= async(req,res,next)=>{
                 message:"All fields are required and password must be >6 characters"
             }})
         }
-
-
     }else{
         res.send('error occured');
     }
+}
+
+exports.getUsers = (req,res,next) =>{
+  User.find({name:{$regex:new RegExp('.*'+req.query.key+'*.',"i")}})
+    .then(docs=>{
+      res.status(200).send({
+        status:1,
+        response:docs
+      })
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+}
+
+exports.getUser = (req,res,next) =>{
+  User.findById(req.params.userid)
+    .then(doc=>{
+      res.status(200).send({
+        status:1,
+        response:doc
+      })
+    })
+    .catch(error=>{
+      console.log(error)
+    })
 }

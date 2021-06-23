@@ -78,7 +78,9 @@ const MenuPage = (props) => {
         <Toolbar>
           <Container maxWidth="false" className={classes.navDisplayFlex}>
             <IconButton edge="start">
-              <img alt="logo" className={classes.iconImage} src="/assets/photos/icon.jpg"/>
+              <Link to='/user/dashboard'>
+                <img alt="logo" className={classes.iconImage} src="/assets/photos/icon.jpg"/>
+              </Link>
             </IconButton>
             <Box className={classes.menuOptions}>
             <Button>
@@ -97,7 +99,7 @@ const MenuPage = (props) => {
               <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                 <Avatar alt={userContext.userInfo.name}
                         src="/assets/photos/610f7a940f59d5cef71f3de7754a70a1411d8bb8.png"/>
-                <span className={classes.menuAvatar}>{userContext.userInfo.name} Demo Username</span>
+                <span className={classes.menuAvatar}>{userContext.userInfo.name}</span>
               </Button>
               <Menu
                 id="simple-menu"
@@ -108,11 +110,13 @@ const MenuPage = (props) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <FaceIcon fontSize="small"/>
-                  </ListItemIcon>
-                  Profile
+                <MenuItem>
+                  <Link to={`/user/${userContext.userInfo.id}/profile`}>
+                    <ListItemIcon>
+                      <FaceIcon fontSize="small"/>
+                    </ListItemIcon>
+                    Profile
+                  </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                   <ListItemIcon>

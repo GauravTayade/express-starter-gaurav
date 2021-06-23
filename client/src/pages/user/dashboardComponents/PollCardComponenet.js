@@ -4,7 +4,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import {makeStyles} from "@material-ui/core/styles";
 import axios from 'axios';
 import '../../utility/AlertSnackbar';
-import AlertSnackbar from "../../utility/AlertSnackbar";
 import DialogCreatePoll from "./DialogCreatePoll";
 
 const poolStyle = makeStyles(theme=>({

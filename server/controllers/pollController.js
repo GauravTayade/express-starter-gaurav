@@ -32,7 +32,7 @@ exports.getPoll = async (req,res,next) => {
 }
 
 exports.getPolls = async (req,res,next) => {
-  const polls = await Poll.find({},(error,polls)=>{
+  const polls = await Poll.find({pollUser:req.query.userid},(error,polls)=>{
     if(error){
       res.status(200).send({'error':error})
     }else{

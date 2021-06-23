@@ -2,47 +2,41 @@ require('dotenv').config();
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 
-exports.login = async (req, res, next) => {
-  if (req.body.loginData.data.username !== '' &&
-    req.body.loginData.data.password !== '') {
-    const user = User.findOne({email: req.body.loginData.data.username}, (err, doc) => {
-      if (doc) {
-        bcrypt.compare(req.body.loginData.data.password, doc.password, (err, result) => {
-          if (result === true) {
-            res.status(200).send({
-              response: {
-                status: 1,
-                message: "Valid user record",
-                userData: {
-                  name: doc.name,
-                  email: doc.email
-                }
-              }
-            })
-          } else {
-            res.status(200).send({
-              response: {
-                status: 0,
-                message: "Invalid Credentials"
-              }
-            })
-          }
-        })
-      } else {
-        res.status(400).send({
-          response: {
-            status: 0,
-            message: "Invalid Credentials"
-          }
-        })
-      }
-    });
-  }
 
+exports.login = async(req,res,next) => {
+    if(req.body.loginData.data.username !== '' &&
+        req.body.loginData.data.password !== ''){
+        const user = User.findOne({email:req.body.loginData.data.username},(err,doc)=>{
+            if(doc){
+                bcrypt.compare(req.body.loginData.data.password,doc.password,(err,result)=>{
+                  console.log(result)
+                    if(result===true){
+                        res.status(200).send({response:{
+                                status:1,
+                                message: "Valid user record",
+                                userData:{
+                                    name:doc.name,
+                                    email:doc.email
+                                }
+                            }})
+                    }else{
+                        res.status(200).send({response:{
+                                status:0,
+                                message: "Invalid Credentials"
+                            }})
+                    }
+                })
+            }else {
+                res.status(400).send( {response:{
+                        status:0,
+                        message: "Invalid Credentials"
+                    }})
+            }
+        });
+    }
 }
 
-exports.register = async (req, res, next) => {
-  console.log(req.body)
+exports.register= async(req,res,next)=>{
 
   if (req.body.userInfo) {
 
@@ -88,9 +82,10 @@ exports.register = async (req, res, next) => {
         }
       })
     }
-
-
-  } else {
-    res.send('Error Occurred');
-  }
+    }else{
+      res.status(400).send({response:{
+          status:false,
+          message:"An error has occured"
+        }})
+    }
 }

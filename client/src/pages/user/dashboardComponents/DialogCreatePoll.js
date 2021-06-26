@@ -25,7 +25,7 @@ const dialogStyle = makeStyles(theme => ({
     marginBottom: "0.3rem",
     display: "inline-block"
   },
-  imgPreview:{
+  imgPreview: {
     height: '200px',
     width: '200px',
     backgroundPosition: "center",
@@ -36,10 +36,10 @@ const dialogStyle = makeStyles(theme => ({
     height: '200px',
     width: '200px',
     border: '1px solid #e8e8e8',
-    backgroundImage:'url(/assets/photos/image_placeholder.png)',
-    backgroundSize:"contain",
-    backgroundRepeat:'no-repeat',
-    backgroundPosition:"center",
+    backgroundImage: 'url(/assets/photos/image_placeholder.png)',
+    backgroundSize: "contain",
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: "center",
     margin: '2rem',
     objectFit: 'scale-down'
   },
@@ -67,30 +67,32 @@ const DialogCreatePoll = (props) => {
 
   const classes = dialogStyle();
   const userContext = useContext(UserContext);
-  const [images,setImages] = useState([]);
-  const [showSnackbar,setShowSnackbar] = useState(false);
-  const [apiResponse,setApiResponse] = useState('');
-  const [poll,setPoll] = useState({poll:{
-      pollUser:'',
-      pollQuestion:'',
-      pollFriendList:'',
-      images:''
-  }})
+  const [images, setImages] = useState([]);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [apiResponse, setApiResponse] = useState('');
+  const [poll, setPoll] = useState({
+    poll: {
+      pollUser: '',
+      pollQuestion: '',
+      pollFriendList: '',
+      images: ''
+    }
+  })
   const file1 = useRef(null);
 
-  const closeSnackbar=()=>{
+  const closeSnackbar = () => {
     setShowSnackbar(false)
   }
 
-  useEffect(()=>{
-    setPoll({poll:{...poll.poll,pollUser:userContext.userInfo.id}});
-  },[])
+  useEffect(() => {
+    setPoll({poll: {...poll.poll, pollUser: userContext.userInfo.id}});
+  }, [])
 
-  useEffect(()=>{
-    if(props.data){
-      setPoll({poll:{...props.data.poll}});
+  useEffect(() => {
+    if (props.data) {
+      setPoll({poll: {...props.data.poll}});
     }
-  },[props.data])
+  }, [props.data])
 
   const dragOver = (e) => {
     e.preventDefault();
@@ -102,12 +104,12 @@ const DialogCreatePoll = (props) => {
     e.preventDefault();
   }
 
-  const handleFileDrop = (e,p) => {
+  const handleFileDrop = (e, p) => {
     e.preventDefault();
     var reader = new FileReader();
-    reader.onload = () =>{
-      if(reader.readyState===2){
-        e.target.setAttribute("src",reader.result)
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        e.target.setAttribute("src", reader.result)
       }
     }
     reader.readAsDataURL(e.dataTransfer.files[0]);
@@ -116,40 +118,40 @@ const DialogCreatePoll = (props) => {
     setImages([...items])
   }
 
-  const handleInput = (e) =>{
-    setPoll({poll: {...poll.poll,pollQuestion:e.target.value}});
+  const handleInput = (e) => {
+    setPoll({poll: {...poll.poll, pollQuestion: e.target.value}});
   }
 
-  const handleSelect = (e) =>{
-    setPoll({poll: {...poll.poll,pollFriendList:e.target.value}})
+  const handleSelect = (e) => {
+    setPoll({poll: {...poll.poll, pollFriendList: e.target.value}})
   }
 
-  const openFileUpload = () =>{
+  const openFileUpload = () => {
     file1.current.click()
   }
 
-  const createPoll = async() => {
+  const createPoll = async () => {
 
     let formData = new FormData();
     formData.set('pollQuestion', poll.poll.pollQuestion);
     formData.set('pollFriendList', poll.poll.pollFriendList);
-    formData.set('pollUser',poll.poll.pollUser);
-    formData.append('file',images[0]);
-    formData.append('file',images[1]);
+    formData.set('pollUser', poll.poll.pollUser);
+    formData.append('file', images[0]);
+    formData.append('file', images[1]);
 
-    axios.post('http://localhost:3001/poll/create',formData)
-      .then(response=>{
-        if(response.data.status===1){
+    axios.post('http://localhost:3001/poll/create', formData)
+      .then(response => {
+        if (response.data.status === 1) {
           setShowSnackbar(true);
           setApiResponse(response.data.message);
-          images.splice(0,images.length);
+          images.splice(0, images.length);
           props.closeDialog();
           window.location.reload(false);
-        }else{
+        } else {
 
         }
       })
-      .catch(error=>{
+      .catch(error => {
         console.log(error);
       })
   }
@@ -157,7 +159,7 @@ const DialogCreatePoll = (props) => {
   const updatePoll = (pollId) => {
 
     let formData = new FormData();
-    formData.set('pollId',pollId);
+    formData.set('pollId', pollId);
     formData.set('pollQuestion', poll.poll.pollQuestion);
     formData.set('pollFriendList', poll.poll.pollFriendList);
     formData.set('pollUser', poll.poll.pollUser);
@@ -166,19 +168,19 @@ const DialogCreatePoll = (props) => {
       formData.append('file', images[1]);
     }
 
-    axios.post('http://localhost:3001/poll/update',formData)
-      .then(response=>{
-        if(response.data.status===1){
+    axios.post('http://localhost:3001/poll/update', formData)
+      .then(response => {
+        if (response.data.status === 1) {
           setShowSnackbar(true);
           setApiResponse(response.data.message);
-          images.splice(0,images.length);
+          images.splice(0, images.length);
           props.closeDialog();
           window.location.reload(false);
-        }else{
+        } else {
 
         }
       })
-      .catch(error=>{
+      .catch(error => {
         console.log(error);
       })
   }
@@ -187,7 +189,7 @@ const DialogCreatePoll = (props) => {
     <>
       <Dialog open={props.dialogStatus} fullWidth={true} maxWidth="md">
         <DialogTitle id="customized-dialog-title">
-          {props.data?
+          {props.data ?
             <Typography variant="h4" align="center">
               Update a Poll
             </Typography>
@@ -214,7 +216,7 @@ const DialogCreatePoll = (props) => {
                     type='text'
                     variant='outlined'
                     label='Question'
-                    value={poll.poll?
+                    value={poll.poll ?
                       poll.poll.pollQuestion
                       :
                       ''
@@ -244,31 +246,32 @@ const DialogCreatePoll = (props) => {
             <Grid item xs={7}>
               <Grid container>
                 <img id="img0" className={classes.dropper}
-                       onClick={openFileUpload}
-                       onDragOver={dragOver}
-                       onDragEnter={dragEnter}
-                       onDragLeave={dragLeave}
-                       onDrop={(e)=>handleFileDrop(e,0)}
-                       src={poll.poll.images[0]?poll.poll.images[0]:''}/>
-                <input type="file" name="image1" ref={file1} style={{"display":'none'}} required/>
+                     onClick={openFileUpload}
+                     onDragOver={dragOver}
+                     onDragEnter={dragEnter}
+                     onDragLeave={dragLeave}
+                     onDrop={(e) => handleFileDrop(e, 0)}
+                     src={poll.poll.images[0] ? poll.poll.images[0] : ''}/>
+                <input type="file" name="image1" ref={file1} style={{"display": 'none'}} required/>
 
                 <img id="img0" className={classes.dropper}
-                       onDragOver={dragOver}
-                       onDragEnter={dragEnter}
-                       onDragLeave={dragLeave}
-                       onDrop={(e) => handleFileDrop(e, 1)}
-                        src={props.data?props.data.poll.images[1]:
-                       images[1]?images[1]:''}/>
+                     onDragOver={dragOver}
+                     onDragEnter={dragEnter}
+                     onDragLeave={dragLeave}
+                     onDrop={(e) => handleFileDrop(e, 1)}
+                     src={props.data ? props.data.poll.images[1] :
+                       images[1] ? images[1] : ''}/>
 
-                <input type="file" style={{"display":'none'}} name="image2"  required/>
+                <input type="file" style={{"display": 'none'}} name="image2" required/>
               </Grid>
             </Grid>
           </Grid>
         </DialogContent>
         <DialogActions className={classes.dialogBottom}>
           <Box alignItems="center">
-            {props.data?
-              <Button variant="contained" onClick={()=>updatePoll(props.data.poll._id)} className={classes.btnBlack}>Update</Button>
+            {props.data ?
+              <Button variant="contained" onClick={() => updatePoll(props.data.poll._id)}
+                      className={classes.btnBlack}>Update</Button>
               :
               <Button variant="contained" onClick={createPoll} className={classes.btnBlack}>CREATE</Button>
             }
@@ -276,7 +279,7 @@ const DialogCreatePoll = (props) => {
         </DialogActions>
       </Dialog>
       <AlertSnackbar status={showSnackbar} message={apiResponse} onclose={closeSnackbar}/>
-      </>
+    </>
   )
 
 }

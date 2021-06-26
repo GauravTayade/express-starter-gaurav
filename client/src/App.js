@@ -27,7 +27,7 @@ function App() {
           <ProtectedRoute path="/user/dashboard" component={DashboardPage}/>
           {/*<Route path="/user/dashboard" exact component={DashboardPage}/>*/}
           <Route path="/user/friends" exact component={FriendsPage}/>
-          <Route path="/user/friends_pool" exact component={FriendsPoolPage}/>
+          <Route path="/user/friends-pool" exact component={FriendsPoolPage}/>
           <Route path="/user/opinion" exact component={OpinionPage}/>
           <ProtectedRoute path="/user/:user_id/profile" exact component={ProfilePage}/>
           {/*<Route path="/user/:user_id/profile" exact component={ProfilePage}/>*/}

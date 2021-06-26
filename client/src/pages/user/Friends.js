@@ -12,8 +12,8 @@ import FriendSearch from "./FriendsComponents/FriendSearch";
 import FriendCard from "./FriendsComponents/FriendCard";
 
 const friendsStyle = makeStyles({
-  marginX:{
-    margin:'2rem 0'
+  marginX: {
+    margin: '2rem 0'
   }
 })
 
@@ -27,84 +27,84 @@ const FriendsPage = () => {
   const user = useContext(UserContext);
   const [receivedRequests, setReceivedRequests] = useState(null);
   const [sentRequests, setSentRequests] = useState(null);
-  const [showFriendSearchDialog,setShowFriendSearchDialog] = useState(false);
-  const [showSnackbar,setShowSnackbar] = useState(false);
-  const [message,setMessage] = useState(null);
+  const [showFriendSearchDialog, setShowFriendSearchDialog] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [message, setMessage] = useState(null);
 
-  const rollbackRequest=(userid)=>{
-    axios.post(process.env.REACT_APP_API_URL+'/friend/cancel',{userid:user.userInfo.id,friendid:userid})
-      .then(result=>{
-        if(result.data.status ===1){
+  const rollbackRequest = (userid) => {
+    axios.post(process.env.REACT_APP_API_URL + '/friend/cancel', {userid: user.userInfo.id, friendid: userid})
+      .then(result => {
+        if (result.data.status === 1) {
           setMessage(result.data.response);
           setShowSnackbar(true)
           getReceivedFriendRequests()
           getSentFriendRequests()
-        }else{
+        } else {
           setMessage(result.data.response);
           setShowSnackbar(true)
         }
       })
-      .catch(error=>{
+      .catch(error => {
         setMessage('Unable to complete request!');
         setShowSnackbar(true)
       })
   }
 
   const acceptRequest = (userid) => {
-    axios.post(process.env.REACT_APP_API_URL+'/friend/accept',{friendid:user.userInfo.id,userid:userid})
-      .then(result=>{
-        if(result.data.status ===1){
+    axios.post(process.env.REACT_APP_API_URL + '/friend/accept', {friendid: user.userInfo.id, userid: userid})
+      .then(result => {
+        if (result.data.status === 1) {
           setMessage(result.data.response);
           setShowSnackbar(true)
           getReceivedFriendRequests()
           getSentFriendRequests()
-        }else{
+        } else {
           setMessage(result.data.response);
           setShowSnackbar(true)
         }
       })
-      .catch(error=>{
-          setMessage('Unable to complete request!');
-          setShowSnackbar(true)
-      })
-  }
-
-  const declineRequest = (userid) =>{
-    axios.post(process.env.REACT_APP_API_URL+'/friend/remove',{friendid:userid,userid:user.userInfo.id})
-      .then(result=>{
-        if(result.data.status ===1) {
-          setMessage(result.data.response);
-          setShowSnackbar(true)
-          getReceivedFriendRequests()
-          getSentFriendRequests()
-        }else{
-          setMessage(result.data.response);
-          setShowSnackbar(true)
-        }
-      })
-      .catch(error=>{
+      .catch(error => {
         setMessage('Unable to complete request!');
         setShowSnackbar(true)
       })
   }
 
-  const sendFriendRequest = (userid) =>{
-    axios.post(process.env.REACT_APP_API_URL+'/friend/add',{friendid:userid,userid:user.userInfo.id})
-      .then(result=>{
-        if(result.data.status===1){
+  const declineRequest = (userid) => {
+    axios.post(process.env.REACT_APP_API_URL + '/friend/remove', {friendid: userid, userid: user.userInfo.id})
+      .then(result => {
+        if (result.data.status === 1) {
+          setMessage(result.data.response);
+          setShowSnackbar(true)
+          getReceivedFriendRequests()
+          getSentFriendRequests()
+        } else {
+          setMessage(result.data.response);
+          setShowSnackbar(true)
+        }
+      })
+      .catch(error => {
+        setMessage('Unable to complete request!');
+        setShowSnackbar(true)
+      })
+  }
+
+  const sendFriendRequest = (userid) => {
+    axios.post(process.env.REACT_APP_API_URL + '/friend/add', {friendid: userid, userid: user.userInfo.id})
+      .then(result => {
+        if (result.data.status === 1) {
           setMessage(result.data.response);
           setShowSnackbar(true);
           getReceivedFriendRequests()
           getSentFriendRequests()
         }
       })
-      .catch(error=>{
+      .catch(error => {
         setMessage('Unable to complete request!');
         setShowSnackbar(true)
       })
   }
 
-  const handleFriendSearchDialog = () =>{
+  const handleFriendSearchDialog = () => {
     setShowFriendSearchDialog(false)
   }
 
@@ -134,7 +134,7 @@ const FriendsPage = () => {
       })
   }
 
-  const closeSnackbar=()=>{
+  const closeSnackbar = () => {
     setShowSnackbar(false)
   }
 
@@ -143,7 +143,7 @@ const FriendsPage = () => {
     getSentFriendRequests()
   }, [])
 
-  const searchFriend =() =>{
+  const searchFriend = () => {
     setShowFriendSearchDialog(true);
   }
 
@@ -165,10 +165,10 @@ const FriendsPage = () => {
         </Grid>
         <Grid item xs={12} justify="center">
           <Grid container alignContent="center" justify="center">
-            {receivedRequests !== null  && receivedRequests.length > 0?
+            {receivedRequests !== null && receivedRequests.length > 0 ?
               <Box>
                 <Grid container spacing={5} alignContent="center" justify="center">
-                  {receivedRequests.map(user=>{
+                  {receivedRequests.map(user => {
                     return <FriendCard
                       requestType={process.env.REACT_APP_FRIEND_REQUEST_TYPE_RECEIVED}
                       rollbackRequest={rollbackRequest}
@@ -199,7 +199,7 @@ const FriendsPage = () => {
             {sentRequests !== null && sentRequests.length > 0 ?
               <Box>
                 <Grid container spacing={5} alignContent="center" justify="center">
-                  {sentRequests.map(user=>{
+                  {sentRequests.map(user => {
                     return <FriendCard
                       requestType={process.env.REACT_APP_FRIEND_REQUEST_TYPE_SENT}
                       rollbackRequest={rollbackRequest}

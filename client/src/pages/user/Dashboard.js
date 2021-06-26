@@ -26,25 +26,25 @@ const DashboardPage = () => {
 
   const classes = dashStyle();
 
-  const [dialogStatus,setDialogStatus] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const closeDialog = () =>{
-    setDialogStatus(false)
+  const closeDialog = () => {
+    setIsDialogOpen(false)
   }
 
-  const openDialog= () =>{
-    setDialogStatus(true)
+  const openDialog = () => {
+    setIsDialogOpen(true)
   }
 
   return (
     <>
-      <MenuPage openDialog={openDialog} dialogStatus={dialogStatus} closeDialog={closeDialog}/>
+      <MenuPage openDialog={openDialog} dialogStatus={isDialogOpen} closeDialog={closeDialog}/>
       <Grid container style={{minHeight: '100vh'}}>
         <Grid item xs={2} className={classes.friendsContainer}>
           <FriendsListComponent/>
         </Grid>
         <Grid item xs={10} className={classes.contentContainer}>
-          <PollComponent openDialog={openDialog} dialogStatus={dialogStatus} closeDialog={closeDialog}/>
+          <PollComponent openDialog={openDialog} dialogStatus={isDialogOpen} closeDialog={closeDialog}/>
           <ListComponent/>
         </Grid>
       </Grid>

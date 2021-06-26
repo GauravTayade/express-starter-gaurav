@@ -2,8 +2,8 @@ import React from 'react';
 
 import MenuPage from "./Menu";
 
-const FriendsPoolPage =()=>{
-  return(
+const FriendsPoolPage = () => {
+  return (
     <>
       <MenuPage/>
       Friends Pool Page
@@ -11,4 +11,4 @@ const FriendsPoolPage =()=>{
   )
 }
 
-export default  FriendsPoolPage;
+export default FriendsPoolPage;

@@ -42,8 +42,8 @@ const profileStyle = makeStyles(theme => ({
     marginTop: '1rem',
     padding: '0.5rem 1rem'
   },
-  linkStyle:{
-    textDecoration:'none'
+  linkStyle: {
+    textDecoration: 'none'
   },
   pollCard: {
     maxWidth: '345px',
@@ -58,8 +58,18 @@ const ProfilePage = (props) => {
   const classes = profileStyle();
   const [polls, setPolls] = useState();
   const [showSnackbar, setShowSnackbar] = useState(false);
-  const [deleteResponse, setDeleteResponse] = useState('');
-  const [userProfile,setUserProfile] = useState(null);
+  const [response, setResponse] = useState('');
+  const [userProfile, setUserProfile] = useState(null);
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const closeDialog = () => {
+    setIsDialogOpen(false)
+  }
+
+  const openDialog = () => {
+    setIsDialogOpen(true)
+  }
 
   const closeSnackbar = () => {
     setShowSnackbar(false)
@@ -69,13 +79,14 @@ const ProfilePage = (props) => {
     axios.post(process.env.REACT_APP_API_URL + '/poll/delete', {'pollId': pollid})
       .then(response => {
         if (response.data.status === 1) {
-          setDeleteResponse(response.data)
+          setResponse(response.data)
           setShowSnackbar(true);
           getPolls();
         }
       })
       .catch(error => {
-        console.log(error)
+        setResponse({message:'Something went wrong! Please try again.'})
+        setShowSnackbar(true);
       })
   }
 
@@ -85,37 +96,52 @@ const ProfilePage = (props) => {
         setPolls(response.data);
       })
       .catch(error => {
-        console.log(error);
+        setResponse({message:'Something went wrong! Please try again.'})
+        setShowSnackbar(true);
       })
   }
 
-  const getUser=()=>{
-    axios.get(process.env.REACT_APP_API_URL+`/user/get/${props.match.params.user_id}`)
-      .then(response=>{
-        if(response.data.status===1){
+  const getUser = () => {
+    axios.get(process.env.REACT_APP_API_URL + `/user/get/${props.match.params.user_id}`)
+      .then(response => {
+        if (response.data.status === 1) {
           setUserProfile(response.data.response)
         }
       })
-      .catch(error=>{
-        console.log(error)
+      .catch(error => {
+        setResponse({message:'Something went wrong! Please try again.'})
+        setShowSnackbar(true);
       })
   }
 
-  const sendFriendRequest = (friend) =>{
-    axios.post(process.env.REACT_APP_API_URL+'/friend/add',{friendid:friend._id,userid:user.userInfo.id})
+  const sendFriendRequest = (friend) => {
+    axios.post(process.env.REACT_APP_API_URL + '/friend/add', {friendid: friend._id, userid: user.userInfo.id})
+      .then(result=>{
+        if(result.data.status ===1){
+          setResponse({message:result.data.response})
+          setShowSnackbar(true);
+        }else{
+          setResponse({message:'Something went wrong! Please try again.'})
+          setShowSnackbar(true);
+        }
+      })
+      .catch(error=>{
+        setResponse({message:'Something went wrong! Please try again.'})
+        setShowSnackbar(true);
+      })
   }
 
   useEffect(() => {
-    if(user.userInfo.id === props.match.params.user_id){
+    if (user.userInfo.id === props.match.params.user_id) {
       getPolls();
-    }else{
+    } else {
       getUser();
     }
   }, [])
 
   return (
     <>
-      <Menu/>
+      <Menu openDialog={openDialog} dialogStatus={isDialogOpen} closeDialog={closeDialog}/>
       {user.login && user.userInfo.id === props.match.params.user_id ?
         <Box>
           <Grid container>
@@ -148,37 +174,37 @@ const ProfilePage = (props) => {
           </Grid>
         </Box>
         :
-            <Box>
-              {userProfile?
-              <Grid container>
-                <Grid item container xs={12} className={classes.profileHeader} justify="center">
-                  <img alt="profile" className={classes.profilePicture}
-                       src="https://www.pearsoncollege.ca/wp-content/uploads/2019/12/placeholder-profile.jpg"/>
-                </Grid>
-                <Grid item xs={3}></Grid>
-                <Grid item xs={6}>
-                  <Typography variant="h2" component="h2" align="center">
-                    {userProfile.name}
-                  </Typography>
-                  <Typography variant="h5" component="h5" align="center">
-                    {userProfile.email}
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}></Grid>
-                <Grid item container xs={12} justify="center">
-                  <Button className={classes.btnCommon} onClick={()=>sendFriendRequest(userProfile)} variant="contained" color="primary">Send Friend Request</Button>
-                </Grid>
-                <Grid container xs={12} justify="center">
-                  <Button className={classes.btnCommon} variant="contained" color="primary">Send Message</Button>
-                </Grid>
+        <Box>
+          {userProfile ?
+            <Grid container>
+              <Grid item container xs={12} className={classes.profileHeader} justify="center">
+                <img alt="profile" className={classes.profilePicture}
+                     src="https://www.pearsoncollege.ca/wp-content/uploads/2019/12/placeholder-profile.jpg"/>
               </Grid>
-
-        :
+              <Grid item xs={3}></Grid>
+              <Grid item xs={6}>
+                <Typography variant="h2" component="h2" align="center">
+                  {userProfile.name}
+                </Typography>
+                <Typography variant="h5" component="h5" align="center">
+                  {userProfile.email}
+                </Typography>
+              </Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item container xs={12} justify="center">
+                <Button className={classes.btnCommon} onClick={() => sendFriendRequest(userProfile)} variant="contained"
+                        color="primary">Send Friend Request</Button>
+              </Grid>
+              <Grid container xs={12} justify="center">
+                <Button className={classes.btnCommon} variant="contained" color="primary">Send Message</Button>
+              </Grid>
+            </Grid>
+            :
             ''
-        }
-            </Box>
+          }
+        </Box>
       }
-      <AlertSnackbar status={showSnackbar} message={deleteResponse.message} onclose={closeSnackbar}/>
+      <AlertSnackbar status={showSnackbar} message={response.message} onclose={closeSnackbar}/>
     </>
   )
 }

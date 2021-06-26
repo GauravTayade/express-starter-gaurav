@@ -21,13 +21,13 @@ import {makeStyles} from "@material-ui/core/styles";
 import {Close} from "@material-ui/icons";
 
 const axiosClient = axios.create({
-  baseURL:process.env.REACT_APP_API_URL,
-  timeout:1000,
+  baseURL: process.env.REACT_APP_API_URL,
+  timeout: 1000,
 })
 
 const dialogStyle = makeStyles(theme => ({
-  root:{
-    overflow:"hidden",
+  root: {
+    overflow: "hidden",
   },
   label: {
     marginBottom: "0.3rem",
@@ -51,15 +51,15 @@ const dialogStyle = makeStyles(theme => ({
     position: 'absolute',
     top: '5px'
   },
-  btnAdd:{
-    marginLeft:'1rem',
-    borderRadius:'1rem',
+  btnAdd: {
+    marginLeft: '1rem',
+    borderRadius: '1rem',
   },
   avatarSm: {
     width: '35px',
     height: '35px'
   },
-  btnClose:{
+  btnClose: {
     paddingRight: '1rem',
     color: 'rgba(0, 0, 0, 0.54)'
   },
@@ -71,23 +71,23 @@ const DialogCreateFriendList = (props) => {
   const imagPath = "/assets/photos/65338712f1d88aa91c7d53e73f1596addb4caad7.png";
   const username = "Demo User";
 
-  const addFriend = (userId) =>{
-    axiosClient.post('/user/friend/add',{'userid':userId})
+  const addFriend = (userId) => {
+    axiosClient.post('/user/friend/add', {'userid': userId})
       .then(result => {
         console.log(result)
       })
-      .catch(error=>{
+      .catch(error => {
         console.log(error)
       })
     console.log(userId);
   }
 
-  const removeFriend = (userId) =>{
-    axiosClient.post('/user/friend/remove',{'userid':userId})
-      .then(result=>{
+  const removeFriend = (userId) => {
+    axiosClient.post('/user/friend/remove', {'userid': userId})
+      .then(result => {
         console.log(result)
       })
-      .catch(error=>{
+      .catch(error => {
         console.log(error)
       })
   }
@@ -138,9 +138,10 @@ const DialogCreateFriendList = (props) => {
             <Grid item xs={6}>
               <List>
                 <ListItem>
-                  <Close className={classes.btnClose} onClick={()=>removeFriend(7862763)}/>
+                  <Close className={classes.btnClose} onClick={() => removeFriend(7862763)}/>
                   <AvatarComponent imageUrl={imagPath} username={username}/>
-                  <Button onClick={()=>addFriend(987897897)} className={classes.btnAdd} variant="contained" color="primary">Add</Button>
+                  <Button onClick={() => addFriend(987897897)} className={classes.btnAdd} variant="contained"
+                          color="primary">Add</Button>
                 </ListItem>
                 <ListItem>
                   <Close className={classes.btnClose}/>

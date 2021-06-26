@@ -2,12 +2,12 @@ import React from 'react';
 import {Box, Typography} from '@material-ui/core';
 
 const Nothing = () => {
-  return(
+  return (
     <>
       <Box>
-      <Typography variant="h5" component="h2" align="center">
-        No Request Received
-      </Typography>
+        <Typography variant="h5" component="h2" align="center">
+          No Request Received
+        </Typography>
       </Box>
     </>
   )

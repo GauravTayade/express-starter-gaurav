@@ -22,7 +22,7 @@ import DialogCreatePoll from "./dashboardComponents/DialogCreatePoll";
 const menuStyle = makeStyles((theme) => ({
   appBar: {
     backgroundColor: "transparent",
-    width:'100%',
+    width: '100%',
   },
   iconImage: {
     width: '68px',
@@ -30,30 +30,30 @@ const menuStyle = makeStyles((theme) => ({
   },
   navDisplayFlex: {
     display: "flex",
-    justifyContent:"space-between"
+    justifyContent: "space-between"
   },
   linkText: {
     textDecoration: "none",
     textTransform: "uppercase",
     color: "#000"
   },
-  menuOptions:{
-    alignItems:"center",
-    justifyContent:"end",
-    display:"inline-flex"
+  menuOptions: {
+    alignItems: "center",
+    justifyContent: "end",
+    display: "inline-flex"
   },
-  linkStyle:{
+  linkStyle: {
     textDecoration: 'none',
     color: '#000',
-    margin:'0rem 4rem'
+    margin: '0rem 4rem'
   },
-  btnRounded:{
+  btnRounded: {
     border: '1px solid #e8e8e8',
     borderRadius: '25px',
     padding: '0.5rem 1rem'
   },
-  menuAvatar:{
-    padding:'0rem 1rem'
+  menuAvatar: {
+    padding: '0rem 1rem'
   }
 }));
 
@@ -83,49 +83,49 @@ const MenuPage = (props) => {
               </Link>
             </IconButton>
             <Box className={classes.menuOptions}>
-            <Button>
-              <Link className={classes.linkStyle} to='/user/friends'>Friends</Link>
-            </Button>
-            <Button>
-              <Link className={classes.linkStyle} to='/user/friends_pool'>Friends Pool</Link>
-            </Button>
+              <Button>
+                <Link className={classes.linkStyle} to='/user/friends'>Friends</Link>
+              </Button>
+              <Button>
+                <Link className={classes.linkStyle} to='/user/friends-pool'>Friends Pool</Link>
+              </Button>
               <Button>
                 <Link className={classes.linkStyle} to='/user/opinion'>Opinion</Link>
               </Button>
-            <Button onClick={props.openDialog} className={[classes.btnRounded,classes.linkStyle]}>
-              Create Pool
-            </Button>
-            <div p={2}>
-              <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                <Avatar alt={userContext.userInfo.name}
-                        src="/assets/photos/610f7a940f59d5cef71f3de7754a70a1411d8bb8.png"/>
-                <span className={classes.menuAvatar}>{userContext.userInfo.name}</span>
+              <Button onClick={props.openDialog} className={[classes.btnRounded, classes.linkStyle]}>
+                Create Pool
               </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                transformOrigin={{ vertical: "top", horizontal: "right" }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem>
-                  <Link to={`/user/${userContext.userInfo.id}/profile`}>
+              <div p={2}>
+                <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                  <Avatar alt={userContext.userInfo.name}
+                          src="/assets/photos/610f7a940f59d5cef71f3de7754a70a1411d8bb8.png"/>
+                  <span className={classes.menuAvatar}>{userContext.userInfo.name}</span>
+                </Button>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  anchorOrigin={{vertical: "bottom", horizontal: "right"}}
+                  transformOrigin={{vertical: "top", horizontal: "right"}}
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem>
+                    <Link to={`/user/${userContext.userInfo.id}/profile`}>
+                      <ListItemIcon>
+                        <FaceIcon fontSize="small"/>
+                      </ListItemIcon>
+                      Profile
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
                     <ListItemIcon>
-                      <FaceIcon fontSize="small"/>
+                      <ExitToAppIcon fontSize="small"/>
                     </ListItemIcon>
-                    Profile
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <ExitToAppIcon fontSize="small"/>
-                  </ListItemIcon>
-                  Logout
-                </MenuItem>
-              </Menu>
-            </div>
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </div>
             </Box>
           </Container>
         </Toolbar>

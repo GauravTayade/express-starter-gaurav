@@ -1,26 +1,26 @@
 import React from 'react';
 
-import {Box,Grid,Typography} from "@material-ui/core";
+import {Box, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
-const notFoundStyle=makeStyles(theme=>({
-  pageBackground:{
-    backgroundColor:'#fff',
-    color:'#000'
+const notFoundStyle = makeStyles(theme => ({
+  pageBackground: {
+    backgroundColor: '#fff',
+    color: '#000'
   },
-  container:{
-    height:'100vh',
+  container: {
+    height: '100vh',
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
   }
 }))
 
-const NotFound = (props) =>{
+const NotFound = (props) => {
 
-  const classes=notFoundStyle();
+  const classes = notFoundStyle();
 
-  return(
+  return (
     <>
       <Box className={classes.pageBackground}>
         <Grid Container className={classes.container}>

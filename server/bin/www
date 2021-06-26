@@ -45,13 +45,13 @@ db.once('open',()=>{
 //future code to save error in log file
 db.on('error',()=>{
 
-  var logfileName = new Date().toISOString().slice(0,10)+'-log.txt'
-  var logfilePath = path.resolve(__dirname,'..')+"\\logs\\"+logfileName;
+  const logfileName = new Date().toISOString().slice(0,10)+'-log.txt'
+  const logfilePath = path.resolve(__dirname,'..')+"\\logs\\"+logfileName;
   //
   if(!fs.existsSync(logfilePath)){
     fs.writeFile(logfilePath,{flag:'wx'},()=>{
       fs.writeFile(logfilePath,'demo data',()=>{
-        console.log('worked');
+
       });
     })
   }

@@ -1,12 +1,14 @@
 import React, {useState} from "react";
-import {Box,
+import {
+  Box,
   Button,
   Card,
   CardContent,
   Grid,
   List,
   ListItem,
-  Typography} from "@material-ui/core";
+  Typography
+} from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import {Close} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
@@ -26,13 +28,13 @@ const ListComponentStyle = makeStyles(theme => ({
     margin: 'auto',
     color: 'rgba(0,0,0,0.54)'
   },
-  btnRounded:{
+  btnRounded: {
     border: '1px solid #e8e8e8',
     borderRadius: '25px',
     padding: '0.5rem 1rem'
   },
-  cardShadow:{
-    boxShadow:'rgba(0,0,0,0.24) 0px 3px 8px'
+  cardShadow: {
+    boxShadow: 'rgba(0,0,0,0.24) 0px 3px 8px'
   }
 }))
 
@@ -40,9 +42,9 @@ const ListComponent = (props) => {
 
   const classes = ListComponentStyle();
 
-  const [friendListDialogStatus,setFriendListDialogStatus] = useState(false);
+  const [friendListDialogStatus, setFriendListDialogStatus] = useState(false);
 
-  const openFriendListDialog = () =>{
+  const openFriendListDialog = () => {
     setFriendListDialogStatus(true)
   }
 
@@ -55,64 +57,64 @@ const ListComponent = (props) => {
 
   return (
     <>
-    <Grid item xs={12}>
-      <Box pt={4} pb={2}>
-        <Grid container>
-          <Grid item xs={10}>
-            <Typography variant="h4">
-              Friend List
-            </Typography>
+      <Grid item xs={12}>
+        <Box pt={4} pb={2}>
+          <Grid container>
+            <Grid item xs={10}>
+              <Typography variant="h4">
+                Friend List
+              </Typography>
+            </Grid>
+            <Grid item container xs={2} justify="center">
+              <Box display="flex" justifyContent="flex-end">
+                <Button onClick={openFriendListDialog} className={classes.btnRounded}>Create List</Button>
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item container xs={2} justify="center">
-            <Box display="flex" justifyContent="flex-end">
-              <Button onClick={openFriendListDialog} className={classes.btnRounded} >Create List</Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box>
-        <Grid container>
+        </Box>
+        <Box>
+          <Grid container>
 
-          <Grid item xs={3}>
-            <Box className={classes.cardShadow}>
-              <Card xs={4} elevation="0">
-                <Box px={3} py={1} borderBottom={1}>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <Typography variant="h5" component="h5">
-                        Fashion
-                      </Typography>
-                      <Typography variant="subtitle2" color="textSecondary" component="h6">
-                        14 friends
-                      </Typography>
+            <Grid item xs={3}>
+              <Box className={classes.cardShadow}>
+                <Card xs={4} elevation="0">
+                  <Box px={3} py={1} borderBottom={1}>
+                    <Grid container>
+                      <Grid item xs={11}>
+                        <Typography variant="h5" component="h5">
+                          Fashion
+                        </Typography>
+                        <Typography variant="subtitle2" color="textSecondary" component="h6">
+                          14 friends
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={1} className={classes.btnSettings}>
+                        <SettingsIcon/>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={1} className={classes.btnSettings}>
-                      <SettingsIcon/>
-                    </Grid>
-                  </Grid>
-                </Box>
-                <CardContent>
-                  <List>
-                    <ListItem>
-                      <Close className={classes.btnClose}/>
-                      <AvatarComponent imageUrl={imagPath} username={username}/>
-                    </ListItem>
-                    <ListItem>
-                      <Close className={classes.btnClose}/>
-                      <AvatarComponent imageUrl={imagPath} username={username}/>
-                    </ListItem>
-                  </List>
-                </CardContent>
-              </Card>
-            </Box>
+                  </Box>
+                  <CardContent>
+                    <List>
+                      <ListItem>
+                        <Close className={classes.btnClose}/>
+                        <AvatarComponent imageUrl={imagPath} username={username}/>
+                      </ListItem>
+                      <ListItem>
+                        <Close className={classes.btnClose}/>
+                        <AvatarComponent imageUrl={imagPath} username={username}/>
+                      </ListItem>
+                    </List>
+                  </CardContent>
+                </Card>
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </Grid>
-  <DialogCreateFriendList
-    dialogStatus={friendListDialogStatus}
-    closeDialog={closeFriendListDialog}/>
-  </>
+        </Box>
+      </Grid>
+      <DialogCreateFriendList
+        dialogStatus={friendListDialogStatus}
+        closeDialog={closeFriendListDialog}/>
+    </>
   )
 
 }

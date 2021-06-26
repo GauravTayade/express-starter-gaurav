@@ -11,7 +11,7 @@ const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 })
 
-const FriendSearch = (props) =>{
+const FriendSearch = (props) => {
 
   const [searchUser, setSearchUser] = useState(null);
 
@@ -29,7 +29,7 @@ const FriendSearch = (props) =>{
     }
   }
 
-  return(
+  return (
     <Dialog open={props.showDialog} fullScreen color="primary">
       <AppBar color="default" position="static">
         <Grid container>
@@ -67,7 +67,7 @@ const FriendSearch = (props) =>{
                 user={user}/>
             })
             :
-              ''
+            ''
           }
         </Grid>
       </Grid>

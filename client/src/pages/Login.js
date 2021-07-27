@@ -14,6 +14,7 @@ const axiosClient = axios.create({
   baseURL: 'http://localhost:3001/'
 });
 
+
 const loginStyle = makeStyles(theme => ({
   loginContainer: {
     justifyContent: 'center',
@@ -101,6 +102,8 @@ const LoginPage = () => {
               userContext.userInfo.name = response.data.response.userData.name;
               userContext.userInfo.email = response.data.response.userData.email;
               userContext.login = true;
+              userContext.timeout = (new Date().getTime() / 1000 ) + 3600
+              localStorage.setItem('userInfo',JSON.stringify(userContext));
               history.push('/user/dashboard');
             } else {
               setShowSnackbar(true);
@@ -118,6 +121,8 @@ const LoginPage = () => {
       setErrors({error: 'Something went wrong! Please, Try again.'})
     }
   }
+
+
 
   return (
     <>

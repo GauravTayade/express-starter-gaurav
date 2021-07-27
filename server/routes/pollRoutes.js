@@ -8,4 +8,6 @@ router.post('/delete',pollController.pollDelete);
 router.post('/update',pollController.pollUpdate);
 router.get('/get/:pollid',pollController.getPoll);
 
+router.post('/updateVote',pollController.updateVote);
+
 module.exports = router;

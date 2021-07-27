@@ -9,7 +9,6 @@ const mongoose = require('mongoose')
 const userRouter = require("./routes/userRoutes");
 const pollRouter = require("./routes/pollRoutes");
 const friendRouter = require("./routes/friendRoutes");
-
 const { json, urlencoded } = express;
 
 var app = express();

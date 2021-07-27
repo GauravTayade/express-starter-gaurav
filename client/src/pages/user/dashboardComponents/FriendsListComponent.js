@@ -1,6 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {Box, List, ListItem, Typography, Grid} from "@material-ui/core";
 import axios from "axios";
+import io from 'socket.io';
 
 import AvatarComponent from "./AvatarComponent";
 import {makeStyles} from "@material-ui/core/styles";
@@ -25,7 +26,7 @@ const FriendsListComponent = (props) => {
   const user = useContext(UserContext);
 
   useEffect(() => {
-    axiosClient.get(`/friend/all?userid=${user.userInfo.id}`)
+    axiosClient.get(`/friend/getOnline?userid=${user.userInfo.id}`)
       .then(response => {
         console.log(response)
       })
@@ -45,6 +46,9 @@ const FriendsListComponent = (props) => {
       </Grid>
       <Grid container justify="left">
         <List>
+          <ListItem className={classes.avatarItem}>
+            <AvatarComponent imageUrl={imagPath} username=''/>
+          </ListItem>
           <ListItem className={classes.avatarItem}>
             <AvatarComponent imageUrl={imagPath} username=''/>
           </ListItem>

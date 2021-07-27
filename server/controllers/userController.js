@@ -121,3 +121,7 @@ exports.getUser = (req, res, next) => {
       console.log(error)
     })
 }
+
+exports.getOnlineUsers = (req,res,next)=>{
+  res.send(req.query.userId)
+}

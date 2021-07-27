@@ -15,9 +15,21 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
         if (userContext.login === true) {
           return <Component {...rest} {...props}/>;
         } else {
-          return (
-            history.push("/login")
-          );
+          const userData = JSON.parse(localStorage.getItem('userInfo'));
+          if (userData && userData.login === true
+            && userContext.login === false
+            && userContext.timeout < new Date().getTime() / 1000
+          ) {
+            userContext.login = userData.login;
+            userContext.userInfo.id = userData.userInfo.id;
+            userContext.userInfo.name = userData.userInfo.name;
+            userContext.userInfo.email = userData.userInfo.email;
+            return <Component {...rest} {...props}/>;
+          } else {
+            return (
+              history.push("/login")
+            );
+          }
         }
       }}
     />

@@ -11,13 +11,11 @@ import FriendsPoolPage from "./pages/user/Opinion";
 import ProfilePage from "./pages/user/Profile";
 import DashboardPage from "./pages/user/Dashboard";
 import NotFound from "./pages/NotFound";
-
 import "./App.css";
 import ProtectedRoute from "./pages/user/HOC/ProtectedRoute";
 
-
-
 function App() {
+
   return (
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
@@ -25,12 +23,10 @@ function App() {
           <Route path="/" exact component={SignupPage}/>
           <Route path="/login" exact component={LoginPage}/>
           <ProtectedRoute path="/user/dashboard" component={DashboardPage}/>
-          {/*<Route path="/user/dashboard" exact component={DashboardPage}/>*/}
           <Route path="/user/friends" exact component={FriendsPage}/>
           <Route path="/user/friends-pool" exact component={FriendsPoolPage}/>
           <Route path="/user/opinion" exact component={OpinionPage}/>
           <ProtectedRoute path="/user/:user_id/profile" exact component={ProfilePage}/>
-          {/*<Route path="/user/:user_id/profile" exact component={ProfilePage}/>*/}
           <Route component={NotFound}/>
         </Switch>
       </BrowserRouter>

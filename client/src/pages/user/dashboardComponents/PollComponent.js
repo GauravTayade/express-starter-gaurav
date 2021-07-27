@@ -30,6 +30,26 @@ const PollComponent = (props) => {
   const user = useContext(UserContext);
 
   useEffect(() => {
+    getPolls();
+  }, [])
+
+  const pollUpdateVote = (pollId,option) => {
+    axios.post(process.env.REACT_APP_API_URL+`/poll/updateVote`,{
+      userid: user.userInfo.id,
+      pollid:pollId,
+      option:option
+    })
+      .then(response => {
+        if(response.data.status ===1){
+          getPolls();
+        }
+      })
+      .catch(error => {
+
+      })
+  }
+
+  const getPolls = () => {
     axiosClient.get(`/poll/all?userid=${user.userInfo.id}`)
       .then(response => {
         setPollsData(response.data)
@@ -37,7 +57,7 @@ const PollComponent = (props) => {
       .catch(error => {
         console.log(error)
       })
-  }, [])
+  }
 
   const classes = poolStyle();
 
@@ -61,7 +81,7 @@ const PollComponent = (props) => {
         <Carousel itemsToShow={4} outerSpacing={0} pagination={false} showArrows={true}
                   preventDefaultTouchmoveEvent={false}>
           {pollsData.polls.map(poll => {
-            return <PollCardCarousel pollData={poll}/>
+            return <PollCardCarousel pollUpdateVote={pollUpdateVote} pollData={poll}/>
           })
           }
         </Carousel>

@@ -5,6 +5,10 @@ exports.getFriend = async(req,res,next) =>{
   console.log('get friend first method works');
 }
 
+exports.getOnlineFriends = async (req,res,next)=>{
+
+}
+
 exports.getFriends = async(req,res,next) =>{
   FriendRequests.find({$and:[{type:process.env.REQUEST_TYPE_FRIEND}],
     $or:[{senderId:req.query.userid},{receiverId:req.query.userid}]})

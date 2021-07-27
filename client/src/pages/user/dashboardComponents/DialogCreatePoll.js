@@ -19,6 +19,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import axios from "axios";
 import '../../utility/AlertSnackbar';
 import AlertSnackbar from "../../utility/AlertSnackbar";
+import {useHistory} from "react-router-dom";
 
 const dialogStyle = makeStyles(theme => ({
   label: {
@@ -66,6 +67,7 @@ const dialogStyle = makeStyles(theme => ({
 const DialogCreatePoll = (props) => {
 
   const classes = dialogStyle();
+  const uHistory = useHistory();
   const userContext = useContext(UserContext);
   const [images, setImages] = useState([]);
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -129,6 +131,10 @@ const DialogCreatePoll = (props) => {
   const openFileUpload = () => {
     file1.current.click()
   }
+
+  useEffect(()=>{
+    console.log(localStorage.getItem('userInfo'));
+  })
 
   const createPoll = async () => {
 

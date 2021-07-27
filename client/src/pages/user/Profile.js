@@ -75,6 +75,22 @@ const ProfilePage = (props) => {
     setShowSnackbar(false)
   }
 
+  const pollUpdateVote = (pollId, option) => {
+    axios.post(process.env.REACT_APP_API_URL + `/poll/updateVote`, {
+      userid: user.userInfo.id,
+      pollid: pollId,
+      option: option
+    })
+      .then(response => {
+        if (response.data.status === 1) {
+          getPolls();
+        }
+      })
+      .catch(error => {
+
+      })
+  }
+
   const deletePoll = (pollid) => {
     axios.post(process.env.REACT_APP_API_URL + '/poll/delete', {'pollId': pollid})
       .then(response => {
@@ -85,7 +101,7 @@ const ProfilePage = (props) => {
         }
       })
       .catch(error => {
-        setResponse({message:'Something went wrong! Please try again.'})
+        setResponse({message: 'Something went wrong! Please try again.'})
         setShowSnackbar(true);
       })
   }
@@ -94,9 +110,10 @@ const ProfilePage = (props) => {
     axios.get(process.env.REACT_APP_API_URL + `/poll/all?userid=${user.userInfo.id}`)
       .then(response => {
         setPolls(response.data);
+        console.log(response.data);
       })
       .catch(error => {
-        setResponse({message:'Something went wrong! Please try again.'})
+        setResponse({message: 'Something went wrong! Please try again.'})
         setShowSnackbar(true);
       })
   }
@@ -109,24 +126,24 @@ const ProfilePage = (props) => {
         }
       })
       .catch(error => {
-        setResponse({message:'Something went wrong! Please try again.'})
+        setResponse({message: 'Something went wrong! Please try again.'})
         setShowSnackbar(true);
       })
   }
 
   const sendFriendRequest = (friend) => {
     axios.post(process.env.REACT_APP_API_URL + '/friend/add', {friendid: friend._id, userid: user.userInfo.id})
-      .then(result=>{
-        if(result.data.status ===1){
-          setResponse({message:result.data.response})
+      .then(result => {
+        if (result.data.status === 1) {
+          setResponse({message: result.data.response})
           setShowSnackbar(true);
-        }else{
-          setResponse({message:'Something went wrong! Please try again.'})
+        } else {
+          setResponse({message: 'Something went wrong! Please try again.'})
           setShowSnackbar(true);
         }
       })
-      .catch(error=>{
-        setResponse({message:'Something went wrong! Please try again.'})
+      .catch(error => {
+        setResponse({message: 'Something went wrong! Please try again.'})
         setShowSnackbar(true);
       })
   }
@@ -134,6 +151,7 @@ const ProfilePage = (props) => {
   useEffect(() => {
     if (user.userInfo.id === props.match.params.user_id) {
       getPolls();
+      console.log(user);
     } else {
       getUser();
     }
@@ -164,9 +182,11 @@ const ProfilePage = (props) => {
               </Grid>
             </Grid>
             <Grid item xs={3}></Grid>
+          </Grid>
+          <Grid container xs={12} justify="center">
             {polls ?
               polls.polls.map(poll => {
-                return <PollCardComponent poll={poll} deletePoll={deletePoll}/>
+                return <PollCardComponent pollUpdateVote={pollUpdateVote} poll={poll} deletePoll={deletePoll}/>
               })
               :
               'no polls'

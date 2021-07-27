@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 
 import MenuPage from './Menu';
 import FriendsListComponent from "./dashboardComponents/FriendsListComponent";
 import PollComponent from "./dashboardComponents/PollComponent";
 import ListComponent from "./dashboardComponents/ListComponent";
-
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {io} from "socket.io-client";
+import UserContext from "../../contexts/UserContext";
+
 
 const dashStyle = makeStyles(theme => ({
   friendsContainer: {
@@ -22,10 +24,11 @@ const dashStyle = makeStyles(theme => ({
   }
 }));
 
+
 const DashboardPage = () => {
 
   const classes = dashStyle();
-
+  const user = useContext(UserContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const closeDialog = () => {
@@ -35,6 +38,19 @@ const DashboardPage = () => {
   const openDialog = () => {
     setIsDialogOpen(true)
   }
+
+  useEffect(async()=>{
+    let result = '';
+    const data="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for ( var i = 0; i < 32; i++ ) {
+      result += data.charAt(Math.floor(Math.random() *
+        32));
+    }
+    if(user.login === true){
+      const socket = io.connect(process.env.REACT_APP_API_URL,{auth:{token:result,user:user}})
+      socket.emit('onlineUser',{user:user})
+    }
+  },[])
 
   return (
     <>

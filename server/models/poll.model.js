@@ -12,8 +12,6 @@ const pollSchema = new Schema({
     type:String
   },
   images:[{type:String}],
-  vote1:[{type:String}],
-  vote2:[{type:String}],
   active:{
     type:Boolean
   }

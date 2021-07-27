@@ -17,14 +17,14 @@ const PollCardComponent = (props) => {
 
   const classes = poolStyle();
   const [pollData,setPollData] = useState();
-  const [dialogStatus,setDialogStatus] = useState(false);
+  const [isDialogOpen,setIsDialogOpen] = useState(false);
 
   const closeDialog = () =>{
-    setDialogStatus(false)
+    setIsDialogOpen(false)
   }
 
   const openDialog= () =>{
-    setDialogStatus(true)
+    setIsDialogOpen(true)
   }
 
   const getPollData =(pollId)=>{
@@ -142,7 +142,7 @@ const PollCardComponent = (props) => {
         </Box>
       </Grid>
       <DialogCreatePoll
-        dialogStatus={dialogStatus}
+        dialogStatus={IsDialogOpen}
         closeDialog={closeDialog}
         data={pollData}/>
     </>

@@ -70,12 +70,12 @@ const DialogCreatePoll = (props) => {
   const [images,setImages] = useState([]);
   const [showSnackbar,setShowSnackbar] = useState(false);
   const [apiResponse,setApiResponse] = useState('');
-  const [poll,setPoll] = useState({poll:{
+  const [poll,setPoll] = useState({
       pollUser:'',
       pollQuestion:'',
       pollFriendList:'',
       images:''
-  }})
+  })
   const file1 = useRef(null);
 
   const closeSnackbar=()=>{
@@ -83,12 +83,12 @@ const DialogCreatePoll = (props) => {
   }
 
   useEffect(()=>{
-    setPoll({poll:{...poll.poll,pollUser:userContext.userInfo.id}});
+    setPoll({...poll.poll,pollUser:userContext.userInfo.id});
   },[])
 
   useEffect(()=>{
     if(props.data){
-      setPoll({poll:{...props.data.poll}});
+      setPoll({...props.data.poll});
     }
   },[props.data])
 
@@ -104,7 +104,7 @@ const DialogCreatePoll = (props) => {
 
   const handleFileDrop = (e,p) => {
     e.preventDefault();
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = () =>{
       if(reader.readyState===2){
         e.target.setAttribute("src",reader.result)
@@ -117,11 +117,11 @@ const DialogCreatePoll = (props) => {
   }
 
   const handleInput = (e) =>{
-    setPoll({poll: {...poll.poll,pollQuestion:e.target.value}});
+    setPoll({...poll,pollQuestion:e.target.value});
   }
 
   const handleSelect = (e) =>{
-    setPoll({poll: {...poll.poll,pollFriendList:e.target.value}})
+    setPoll({...poll,pollFriendList:e.target.value})
   }
 
   const openFileUpload = () =>{
@@ -130,10 +130,10 @@ const DialogCreatePoll = (props) => {
 
   const createPoll = async() => {
 
-    let formData = new FormData();
-    formData.set('pollQuestion', poll.poll.pollQuestion);
-    formData.set('pollFriendList', poll.poll.pollFriendList);
-    formData.set('pollUser',poll.poll.pollUser);
+    const formData = new FormData();
+    formData.set('pollQuestion', poll.pollQuestion);
+    formData.set('pollFriendList', poll.pollFriendList);
+    formData.set('pollUser',poll.pollUser);
     formData.append('file',images[0]);
     formData.append('file',images[1]);
 
@@ -155,11 +155,11 @@ const DialogCreatePoll = (props) => {
 
   const updatePoll = (pollId) => {
 
-    let formData = new FormData();
+    const formData = new FormData();
     formData.set('pollId',pollId);
-    formData.set('pollQuestion', poll.poll.pollQuestion);
-    formData.set('pollFriendList', poll.poll.pollFriendList);
-    formData.set('pollUser', poll.poll.pollUser);
+    formData.set('pollQuestion', poll.pollQuestion);
+    formData.set('pollFriendList', poll.pollFriendList);
+    formData.set('pollUser', poll.pollUser);
     if (images.length > 0) {
       formData.append('file', images[0]);
       formData.append('file', images[1]);
@@ -213,8 +213,8 @@ const DialogCreatePoll = (props) => {
                     type='text'
                     variant='outlined'
                     label='Question'
-                    value={poll.poll?
-                      poll.poll.pollQuestion
+                    value={poll?
+                      poll.pollQuestion
                       :
                       ''
                     }
@@ -248,7 +248,7 @@ const DialogCreatePoll = (props) => {
                        onDragEnter={dragEnter}
                        onDragLeave={dragLeave}
                        onDrop={(e)=>handleFileDrop(e,0)}
-                       src={poll.poll.images[0]?poll.poll.images[0]:''}/>
+                       src={poll.images[0]?poll.images[0]:''}/>
                 <input type="file" name="image1" ref={file1} style={{"display":'none'}} required/>
 
                 <img id="img0" className={classes.dropper}
@@ -256,7 +256,7 @@ const DialogCreatePoll = (props) => {
                        onDragEnter={dragEnter}
                        onDragLeave={dragLeave}
                        onDrop={(e) => handleFileDrop(e, 1)}
-                        src={props.data?props.data.poll.images[1]:
+                        src={props.data?props.data.images[1]:
                        images[1]?images[1]:''}/>
 
                 <input type="file" style={{"display":'none'}} name="image2"  required/>

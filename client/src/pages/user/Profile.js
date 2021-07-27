@@ -29,7 +29,6 @@ const profileStyle = makeStyles(theme => ({
   profileHeader: {
     minHeight: '35rem',
     position: 'relative',
-    // backgroundImage:'url("https://w.wallhaven.cc/full/k7/wallhaven-k78l1d.jpg")',
     backgroundImage: 'url("/assets/images/profile-background.jpg")',
     backgroundPosition: 'center top',
     backgroundAttachment: 'fixed',
